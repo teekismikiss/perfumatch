@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Iconos Marashi</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }
+        .canvas-container { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+        canvas { border: 1px solid #ccc; }
+        button { padding: 10px 20px; background: #d4af37; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Generador de Iconos PWA</h1>
+    <p>Haz clic en cada tamaño para descargar el icono:</p>
+    <div class="canvas-container" id="container"></div>
+    <button onclick="downloadAll()">Descargar Todos</button>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        const container = document.getElementById('container');
+
+        sizes.forEach(size => {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            canvas.dataset.size = size;
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#faf8f5';
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, size * 0.2);
+            ctx.fill();
+            
+            // Gold circle
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#d4af37');
+            gradient.addColorStop(1, '#e8c968');
+            
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(size/2, size * 0.43, size * 0.15, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Letter M
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.12}px serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('M', size/2, size * 0.43);
+            
+            // Lines
+            ctx.fillStyle = gradient;
+            const lineWidth = size * 0.4;
+            const lineHeight = size * 0.015;
+            ctx.fillRect((size - lineWidth)/2, size * 0.62, lineWidth, lineHeight);
+            
+            ctx.fillStyle = '#d4af37';
+            ctx.globalAlpha = 0.5;
+            ctx.fillRect((size - lineWidth * 0.7)/2, size * 0.66, lineWidth * 0.7, lineHeight * 0.8);
+            
+            container.appendChild(canvas);
+        });
+
+        function downloadAll() {
+            document.querySelectorAll('canvas').forEach(canvas => {
+                const link = document.createElement('a');
+                link.download = `icon-${canvas.dataset.size}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>

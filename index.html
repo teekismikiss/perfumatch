@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#F9F1F0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="description"
+        content="Marashi - Encuentra la equivalencia de tu perfume favorito con elegancia y rapidez.">
+
+    <title>Marashi | Buscador de Perfumes</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1 class="logo">Perfumatch<span>.</span></h1>
+            <p class="tagline">Elegancia en cada nota</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput"
+                    placeholder="Busca Aurélia, B406, Lune Divine..." autocomplete="off">
+                <span class="search-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </span>
+            </div>
+        </div>
+
+        <div class="filters-container">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="femme">Mujer</button>
+            <button class="filter-btn" data-filter="homme">Hombre</button>
+            <button class="filter-btn" data-filter="luxe">Luxe</button>
+        </div>
+
+        <div class="results-container" id="results">
+            <!-- Results will be injected here by app.js -->
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Perfumatch • Perfumes de Equivalencia</p>
+        </footer>
+    </div>
+
+    <button class="install-btn" id="installBtn">Instalar en mi móvil</button>
+
+    <!-- Scripts -->
+    <script src="collection.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
